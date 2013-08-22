@@ -27,6 +27,7 @@ Supported protocols
 * XEP-0059: Result Set Management
 * XEP-0136: Message Archiving
 * XEP-0224: Attention
+* XEP-0166: Jingle
 
 Translations
 ============

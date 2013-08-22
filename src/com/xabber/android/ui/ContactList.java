@@ -135,6 +135,7 @@ public class ContactList extends ManagedListActivity implements
 	private static final int CONTEXT_MENU_JOIN_ROOM_ID = 0x1A;
 	private static final int CONTEXT_MENU_EDIT_ROOM_ID = 0x1B;
 	private static final int CONTEXT_MENU_VIEW_CONTACT_ID = 0x1C;
+    private static final int CONTEXT_MENU_CALL_ID = 0x1D;
 
 	private static final int CONTEXT_MENU_GROUP_RENAME_ID = 0x31;
 	private static final int CONTEXT_MENU_GROUP_DELETE_ID = 0x32;
@@ -187,6 +188,8 @@ public class ContactList extends ManagedListActivity implements
 	 * Title view.
 	 */
 	private View titleView;
+
+    private static Context context;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -257,7 +260,13 @@ public class ContactList extends ManagedListActivity implements
 			action = getIntent().getAction();
 		}
 		getIntent().setAction(null);
+
+        context = this;
 	}
+
+    public static Context getContext() {
+        return context;
+    }
 
 	@Override
 	protected void onNewIntent(Intent intent) {
@@ -509,6 +518,7 @@ public class ContactList extends ManagedListActivity implements
 				menu.setHeaderTitle(abstractContact.getName());
 				menu.add(0, CONTEXT_MENU_VIEW_CHAT_ID, 0, getResources()
 						.getText(R.string.chat_viewer));
+                menu.add(0, CONTEXT_MENU_CALL_ID, 0, getResources().getText(R.string.jingle_viewer));
 				if (MUCManager.getInstance().hasRoom(actionWithAccount,
 						actionWithUser)) {
 					if (!MUCManager.getInstance().inUse(actionWithAccount,
@@ -645,6 +655,10 @@ public class ContactList extends ManagedListActivity implements
 			startActivity(ChatViewer.createIntent(this, actionWithAccount,
 					actionWithUser));
 			return true;
+        case CONTEXT_MENU_CALL_ID:
+            startActivity(JingleViewer.createIntent(this, actionWithAccount,
+                    actionWithUser));
+            return true;
 		case CONTEXT_MENU_VIEW_CONTACT_ID:
 			startActivity(ContactViewer.createIntent(this, actionWithAccount,
 					actionWithUser));

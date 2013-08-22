@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Contact"
+            android:id="@+id/jingle_contact_name" android:layout_gravity="center"
+            android:paddingTop="@dimen/contact_list_item_padding_top"
+            android:textSize="@dimen/contact_list_item_height"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Account"
+            android:id="@+id/jingle_account_name" android:textStyle="bold"
+            android:textSize="@dimen/contact_name_height_show_status" android:layout_gravity="center"/>
+    <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="End Call"
+                android:id="@+id/jingle_end" android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true" android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true" android:textColor="@android:color/background_light"/>
+    </RelativeLayout>
+</LinearLayout>

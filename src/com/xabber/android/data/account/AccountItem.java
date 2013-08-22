@@ -17,6 +17,7 @@ package com.xabber.android.data.account;
 import java.security.KeyPair;
 import java.util.Date;
 
+import com.xabber.android.data.jingle.JingleManager;
 import org.jivesoftware.smack.packet.Presence;
 import org.jivesoftware.smack.packet.Presence.Type;
 
@@ -101,6 +102,11 @@ public class AccountItem extends ConnectionItem {
 
 	private ArchiveMode archiveMode;
 
+    /**
+     * Every account has its own JingleManager
+     */
+    private JingleManager jingleManager;
+
 	public AccountItem(AccountProtocol protocol, boolean custom, String host,
 			int port, String serverName, String userName, String resource,
 			boolean storePassword, String password, int colorIndex,
@@ -126,6 +132,8 @@ public class AccountItem extends ConnectionItem {
 		authFailed = false;
 		invalidCertificate = false;
 		passwordRequested = false;
+
+        this.jingleManager = new JingleManager(account);
 	}
 
 	/**
@@ -310,6 +318,14 @@ public class AccountItem extends ConnectionItem {
 		}
 	}
 
+    /**
+     *
+     * @return the JingleManager for this account
+     */
+    public JingleManager getJingleManager() {
+        return jingleManager;
+    }
+
 	/**
 	 * @return Whether account is enabled.
 	 */
@@ -416,6 +432,7 @@ public class AccountItem extends ConnectionItem {
 	protected void onClose(ConnectionThread connectionThread) {
 		super.onClose(connectionThread);
 		AccountManager.getInstance().onAccountChanged(account);
+        jingleManager.close();
 	}
 
 	@Override

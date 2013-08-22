@@ -169,14 +169,7 @@ public class ConnectionManager implements OnInitializedListener,
 	 */
 	public void sendPacket(String account, Packet packet)
 			throws NetworkException {
-		ConnectionThread connectionThread = null;
-		for (ConnectionThread check : managedConnections)
-			if (check.getConnectionItem() instanceof AccountItem
-					&& ((AccountItem) check.getConnectionItem()).getAccount()
-							.equals(account)) {
-				connectionThread = check;
-				break;
-			}
+		ConnectionThread connectionThread = getThreadForAccount(account);
 		if (connectionThread == null
 				|| !connectionThread.getConnectionItem().getState()
 						.isConnected())
@@ -188,6 +181,23 @@ public class ConnectionManager implements OnInitializedListener,
 			throw new NetworkException(R.string.XMPP_EXCEPTION);
 		}
 	}
+
+    /**
+     * Return the ConnectionThread for a given account
+     *
+     * @param account
+     * @return
+     */
+    public ConnectionThread getThreadForAccount(String account) {
+        for (ConnectionThread check : managedConnections) {
+            if (check.getConnectionItem() instanceof AccountItem
+                    && ((AccountItem) check.getConnectionItem()).getAccount()
+                    .equals(account)) {
+                return check;
+            }
+        }
+        return null;
+    }
 
 	/**
 	 * Send packet to authenticated connection. And notify listener about
@@ -249,6 +259,7 @@ public class ConnectionManager implements OnInitializedListener,
 	}
 
 	public void processPacket(ConnectionThread connectionThread, Packet packet) {
+        System.err.println(packet.toXML());
 		if (!managedConnections.contains(connectionThread))
 			return;
 		ConnectionItem connectionItem = connectionThread.getConnectionItem();

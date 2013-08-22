@@ -41,6 +41,8 @@
     <!-- http://dl.dropbox.com/u/1029995/com.xabber.android/contact_list_contact_context_menu.png -->
     <string name="chat_viewer">Chat</string>
     <!-- http://dl.dropbox.com/u/1029995/com.xabber.android/contact_list_contact_context_menu.png -->
+    <string name="jingle_viewer">Voice Call</string>
+    <!-- This was added to accommodate Droingle -->
     <string name="close_chat">Close chat</string>
     <!-- http://dl.dropbox.com/u/1029995/com.xabber.android/contact_list_error.png -->
     <string name="CONNECTION_FAILED">Connection error</string>

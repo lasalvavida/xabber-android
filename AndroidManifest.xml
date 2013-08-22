@@ -103,6 +103,13 @@
             </intent-filter>
         </activity>
         <activity
+            android:label="@string/jingle_viewer"
+            android:name="com.xabber.android.ui.JingleViewer"
+            android:theme="@style/Theme.Dark.NoTitleBar"
+            android:windowSoftInputMode="adjustResize"
+            android:launchMode="singleTop"
+            />
+        <activity
             android:label="@string/contact_editor"
             android:name="com.xabber.android.ui.ContactEditor"
             android:theme="@style/Theme.NoTitleBar"
@@ -252,4 +259,5 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 </manifest> 
